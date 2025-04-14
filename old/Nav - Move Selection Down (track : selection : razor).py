@@ -1,5 +1,4 @@
 import reaper_python as rp
-from utils import console
 
 class Loop():
   def __init__(self):

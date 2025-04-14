@@ -1,6 +1,4 @@
 import reaper_python as rp
-import sws_python64 as sws
-from utils import console
 
 
 

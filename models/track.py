@@ -57,7 +57,6 @@ class Track:
     def set_arm(self, value: bool):
         rp.RPR_SetMediaTrackInfo_Value(self.track, "I_RECARM", value)
 
-
     # view functions
     def set_height(self, height: float, isAdjust: bool):
         if isAdjust:

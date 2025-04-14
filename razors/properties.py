@@ -1,7 +1,5 @@
-
 import reaper_python as rp
 from models import Track
-
 
 
 def get_bounds() -> tuple[float | None, float | None]:
@@ -17,6 +15,3 @@ def get_bounds() -> tuple[float | None, float | None]:
             end_pos = track.razor.end
 
     return start_pos, end_pos
-
-
-

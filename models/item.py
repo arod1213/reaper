@@ -34,4 +34,3 @@ class Item:
 
     def loop(self, value: bool):
         rp.RPR_SetMediaItemInfo_Value(self.item, "B_LOOPSRC", value)
-

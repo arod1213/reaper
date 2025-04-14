@@ -1,0 +1,26 @@
+[tool.ruff]
+exclude = [
+    "reaper_python.py",  # Specific file
+    "imgui.py",
+    "sws_python64.py",
+
+    "env/*", # ignore env files
+    "tests/*",  # Ignore all files in 'tests' folder
+    "old/*",  # Ignore all files in 'old' folder
+    "*.test.py",  # Ignore all test files
+]
+
+[tool.mypy]
+python_version = "3.12"  # or your actual version
+warn_return_any = true
+warn_unused_configs = true
+
+# Exclude specific files/directories using regular expressions
+exclude = [
+    '^reaper_python\.py$',     # Exclude this specific file
+    '^env/',                   # Exclude env/ directory (regex for a directory)
+    '^\.venv/',                # Optional: ignore common virtual envs
+    '^build/',                 # Optional: ignore build folder
+    '^old/',                   # Optional: ignore old folder
+    '^dist/',                  # Optional: ignore dist folder
+]

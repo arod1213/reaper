@@ -11,11 +11,19 @@ class Item:
 
     def __init__(self, item):
         self.item = item
+
+        # time properties
         self.length = float(rp.RPR_GetMediaItemInfo_Value(item, "D_LENGTH"))
         self.start = float(rp.RPR_GetMediaItemInfo_Value(item, "D_POSITION"))
         self.end = float(self.start + self.length)
+
         self.selected = int(rp.RPR_GetMediaItemInfo_Value(item, "B_UISEL"))
+
         self.track = Track(rp.RPR_GetMediaItem_Track(item))
+
+        self.lanestate = rp.RPR_GetMediaTrackInfo_Value(item, "C_LANESCOLLAPSED")
+        self.lanecount = rp.RPR_GetMediaTrackInfo_Value(item, "I_NUMFIXEDLANES")
+
         self.active_take = Take(rp.RPR_GetActiveTake(item))
 
     def delete(self):
@@ -23,3 +31,7 @@ class Item:
 
     def set_selected(self, value: bool):
         rp.RPR_SetMediaItemInfo_Value(self.item, "B_UISEL", value)
+
+    def loop(self, value: bool):
+        rp.RPR_SetMediaItemInfo_Value(self.item, "B_LOOPSRC", value)
+

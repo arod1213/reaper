@@ -3,8 +3,8 @@ import razors
 
 
 def main():
-    items.find.clear()
-    razors.properties.clear()
+    items.selection.clear()
+    razors.set.clear()
 
 
 if __name__ == "__main__":

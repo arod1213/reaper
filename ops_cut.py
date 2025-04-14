@@ -21,7 +21,9 @@ def main():
     prev_track = None
     if start_pos is None or end_pos is None:
         project.set_context("tracks")
-        first_sel_track = tracks.selection.get_selected(position="first")
+        first_sel_track = tracks.find.get_selected(position="first")
+        if not first_sel_track:
+            return None
         if first_sel_track.number > 1:
             prev_track = tracks.find.get(first_sel_track.number - 1)
 
@@ -30,7 +32,7 @@ def main():
 
     # Restore razor bounds if they exist
     if start_pos is not None and end_pos is not None:
-        razors.properties.set_to_bounds(start_pos, end_pos)
+        razors.set.set_to_bounds(start_pos, end_pos)
 
     # select prev track
     if prev_track is not None:

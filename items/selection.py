@@ -15,8 +15,7 @@ def clear() -> None:
 def select_items_in_bounds(start_pos: float, end_pos: float):
     if start_pos >= end_pos:
         raise ValueError("Invalid input: positions cant overlap")
-    avail_tracks = tracks.find.selected_or_editable()
-    rp.RPR_ShowConsoleMsg(len(avail_tracks))
+    avail_tracks = tracks.find.in_razor()
     for track in avail_tracks:
         num_items = rp.RPR_CountTrackMediaItems(track.track)
         for a in range(num_items):

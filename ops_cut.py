@@ -8,7 +8,7 @@ from models import Project
 def main():
     project = Project(0)
     item_start, item_end = items.find.get_selection_bounds()
-    razor_start, razor_end = razors.properties.get_bounds()
+    razor_start, razor_end, _ = razors.properties.get_bounds()
 
     # Use razor bounds if available, otherwise use item bounds
     start_pos, end_pos = (

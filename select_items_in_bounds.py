@@ -3,7 +3,7 @@ import razors
 
 
 def main():
-    start_pos, end_pos = razors.properties.get_bounds()
+    start_pos, end_pos, exists = razors.properties.get_bounds()
     if start_pos is None or end_pos is None:
         return
     items.selection.clear()

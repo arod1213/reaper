@@ -51,7 +51,7 @@ def move_by_screen(direction: Literal["left", "right"]):
     cursor_position = get()
     time = cursor_position + amount
 
-    razor_start, razor_end = razors.properties.get_bounds()
+    razor_start, razor_end, _ = razors.properties.get_bounds()
 
     if razor_start is not None and cursor_position != razor_start:
         cursor.move(razor_start - cursor_position)
@@ -71,7 +71,7 @@ def move_to_division(division: float, direction: grid.direction = "right") -> No
     cursor_position = get()
     time = grid.get(cursor_position, division, direction)
 
-    razor_start, razor_end = razors.properties.get_bounds()
+    razor_start, razor_end, _ = razors.properties.get_bounds()
 
     if razor_start is not None and cursor_position != razor_start:
         cursor.move(razor_start - cursor_position)

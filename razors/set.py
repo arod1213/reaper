@@ -29,7 +29,7 @@ def extend(
     print()
     cursor_pos = float(rp.RPR_GetCursorPosition())
 
-    razor_start, razor_end = properties.get_bounds()
+    razor_start, razor_end, _ = properties.get_bounds()
 
     if direction == "left":
         end_pos = cursor_pos

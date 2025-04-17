@@ -2,7 +2,7 @@ import reaper_python as rp
 from models import Track
 
 
-def get_bounds() -> tuple[float | None, float | None]:
+def get_bounds() -> tuple[float | None, float | None, bool]:
     num_tracks = rp.RPR_CountTracks(0)
     start_pos, end_pos = None, None
     for i in range(num_tracks):
@@ -14,4 +14,8 @@ def get_bounds() -> tuple[float | None, float | None]:
         if end_pos is None or track.razor.end > end_pos:
             end_pos = track.razor.end
 
-    return start_pos, end_pos
+    exists = start_pos is not None and end_pos is not None
+    if exists:
+        start_pos = float(start_pos or 0)
+        end_pos = float(end_pos or 0)
+    return start_pos, end_pos, exists

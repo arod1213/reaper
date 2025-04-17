@@ -30,12 +30,9 @@ class MediaItem:
 
     def setRazor(self):
         bounds = "{} {} ''".format(round(self.start, 14), round(self.end, 14))
-        console(bounds)
-        console(
-            rp.RPR_GetSetMediaTrackInfo_String(
-                self.parTrack, "P_RAZOREDITS", bounds, True
-            )[2]
-        )
+        rp.RPR_GetSetMediaTrackInfo_String(
+            self.parTrack, "P_RAZOREDITS", bounds, True
+        )[2]
 
 
 # -----------------------------------------------------

@@ -50,14 +50,15 @@ def get_match(value: str | int) -> Track | None:
 position = Literal["first", "last"]
 
 
-def selected_or_editable():
+def in_razor():
     tracks: List[Track] = []
     num_tracks = rp.RPR_CountTracks(0)
     for i in range(num_tracks):
         t = Track(rp.RPR_GetTrack(0, i))
-        if t.selected or t.razor.exists:
+        if t.razor.exists:
             tracks.append(t)
     return tracks
+
 
 def get_selected(position: position = "first") -> Track | None:
     track_num = 0

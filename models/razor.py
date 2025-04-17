@@ -2,6 +2,7 @@ from typing import Optional
 
 import reaper_python as rp
 
+
 class Razor:
     start: Optional[float]
     end: Optional[float]

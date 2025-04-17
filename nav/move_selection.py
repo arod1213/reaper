@@ -19,7 +19,7 @@ def move_selection(
         track = tracks.selection.move_track_selection_down(count=count, extend=extend)
     if not track:
         return
-    start_pos, end_pos = razors.properties.get_bounds()
+    start_pos, end_pos, _ = razors.properties.get_bounds()
 
     if not extend:
         razors.set.clear()

@@ -1,4 +1,5 @@
 from typing import Literal
+from utils.compare import is_rounding_error
 
 import reaper_python as rp
 
@@ -25,11 +26,15 @@ def get(location: float, division: float, direction: direction = "right") -> flo
     found_division = location
     deviation = 0.0
     if direction == "right":
-        while found_division <= location and deviation < 10:
+        while (
+            found_division <= location or is_rounding_error(found_division, location)
+        ) and deviation < 10:
             found_division = rp.RPR_SnapToGrid(0, location + deviation)
             deviation += max([min([0.1, 0.1 * division]), 0.001])
     else:
-        while found_division >= location and deviation < 10:
+        while (
+            found_division >= location or is_rounding_error(found_division, location)
+        ) and deviation < 10:
             found_division = rp.RPR_SnapToGrid(0, location - deviation)
             deviation += max([min([0.1, 0.1 * division]), 0.001])
 

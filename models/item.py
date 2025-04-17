@@ -38,11 +38,17 @@ class Item:
     def loop(self, value: bool):
         rp.RPR_SetMediaItemInfo_Value(self.item, "B_LOOPSRC", value)
 
-    def set_fade(self, fade_type: Literal['in', 'out'], value: float, isAdjust: bool = False, override: bool = False):
+    def set_fade(
+        self,
+        fade_type: Literal["in", "out"],
+        value: float,
+        isAdjust: bool = False,
+        override: bool = False,
+    ):
         curr_fade = self.fade_in_len
         property = "D_FADEINLEN"
-        match (fade_type):
-            case ('out'):
+        match fade_type:
+            case "out":
                 property = "D_FADEOUTLEN"
                 curr_fade = self.fade_out_len
 
@@ -52,5 +58,3 @@ class Item:
             return
         rp.RPR_SetMediaItemInfo_Value(self.item, property, value)
         rp.RPR_UpdateArrange()
-
-

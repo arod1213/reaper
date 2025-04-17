@@ -3,7 +3,7 @@ import reaper_python as rp
 from .source import Source
 
 
-class Take:
+class Take():
     def __init__(self, take):
         self.take = take
         self.volume = float(rp.RPR_GetMediaItemTakeInfo_Value(take, "D_VOL"))

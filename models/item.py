@@ -2,6 +2,7 @@ import reaper_python as rp
 
 from .take import Take
 from .track import Track
+from typing import Literal
 
 
 class Item:
@@ -25,6 +26,8 @@ class Item:
         self.lanecount = rp.RPR_GetMediaTrackInfo_Value(item, "I_NUMFIXEDLANES")
 
         self.active_take = Take(rp.RPR_GetActiveTake(item))
+        self.fade_in_len = rp.RPR_GetMediaItemInfo_Value(self.item, "D_FADEINLEN")
+        self.fade_out_len = rp.RPR_GetMediaItemInfo_Value(self.item, "D_FADEOUTLEN")
 
     def delete(self):
         rp.RPR_DeleteTrackMediaItem(tr=self.track.track, it=self.item)
@@ -34,3 +37,20 @@ class Item:
 
     def loop(self, value: bool):
         rp.RPR_SetMediaItemInfo_Value(self.item, "B_LOOPSRC", value)
+
+    def set_fade(self, fade_type: Literal['in', 'out'], value: float, isAdjust: bool = False, override: bool = False):
+        curr_fade = self.fade_in_len
+        property = "D_FADEINLEN"
+        match (fade_type):
+            case ('out'):
+                property = "D_FADEOUTLEN"
+                curr_fade = self.fade_out_len
+
+        if isAdjust:
+            value += curr_fade
+        if curr_fade > 0 and not override:
+            return
+        rp.RPR_SetMediaItemInfo_Value(self.item, property, value)
+        rp.RPR_UpdateArrange()
+
+

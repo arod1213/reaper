@@ -2,6 +2,7 @@ import reaper_python as rp
 from models import Item
 
 from . import properties
+import tracks
 
 
 def clear() -> None:
@@ -14,12 +15,12 @@ def clear() -> None:
 def select_items_in_bounds(start_pos: float, end_pos: float):
     if start_pos >= end_pos:
         raise ValueError("Invalid input: positions cant overlap")
-    num_sel_tracks = rp.RPR_CountSelectedTracks2(0, False)
-    for i in range(num_sel_tracks):
-        track = rp.RPR_GetSelectedTrack2(0, i, False)
-        num_items = rp.RPR_CountTrackMediaItems(track)
+    avail_tracks = tracks.find.selected_or_editable()
+    rp.RPR_ShowConsoleMsg(len(avail_tracks))
+    for track in avail_tracks:
+        num_items = rp.RPR_CountTrackMediaItems(track.track)
         for a in range(num_items):
-            item = Item(rp.RPR_GetTrackMediaItem(track, a))
+            item = Item(rp.RPR_GetTrackMediaItem(track.track, a))
             if properties.is_item_in_bounds(item, start_pos, end_pos):
                 item.set_selected(True)
 

@@ -2,7 +2,6 @@ from typing import Optional
 
 import reaper_python as rp
 
-
 class Razor:
     start: Optional[float]
     end: Optional[float]
@@ -18,3 +17,6 @@ class Razor:
         else:
             self.start = None
             self.end = None
+        # console(self.start)
+        # console(self.end)
+        self.exists = self.start is not None and self.end is not None
